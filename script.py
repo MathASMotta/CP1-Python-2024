@@ -1,45 +1,22 @@
 import csv #importando a biblioteca para manipular o csv
-import pandas as pd
 
-# Listas com os tipos do titulos
-tipos_com_a = []
-tipos_com_k = []
-
-# Listas com os tipos dos titulos
-avaliacoes_com_a = []
-avaliacoes_com_k = []
-
-# Listas das descrições dos titulos
-descricoes_com_a = []
-descricoes_com_k = []
+# Lista dos dos titulos
+diretores = []
 
 # Lista com os paises dos titulos
-pais_com_k = []
+pais = []
 
 # Lista com a duração de cada titulo
-duracao_com_k = []
+duracao = []
 
 def extrair_dados(arquivo_csv):
     with open(arquivo_csv, 'r', encoding='utf-8') as csvfile:
         leitor_csv = csv.DictReader(csvfile)
 
         for linha in leitor_csv:
-            titulo = linha['title'].lower()
-            tipo = linha['type']
-            avaliacao = linha['rating']
-            descricao = linha['description']
-            pais = linha['country']
-            duracao = linha['duration']
-            if titulo.startswith("a"):
-                tipos_com_a.append(tipo)
-                avaliacoes_com_a.append(avaliacao)
-                descricoes_com_a.append(descricao)
-            elif titulo.startswith("k"):
-                tipos_com_k.append(tipo)
-                avaliacoes_com_k.append(avaliacao)
-                descricoes_com_k.append(descricao)
-                pais_com_k.append(pais)
-                duracao_com_k.append(duracao)
+            diretores.append(linha['director'])
+            pais.append(linha['country']) 
+            duracao.append(linha['duration']) 
 
 def contador(lista):
     # Dicionário para contar a ocorrência de cada item
@@ -73,9 +50,8 @@ def caracteres(lista):
     lista_decimo_terceiro = []
 
     for elemento in lista:
-        elemento_tratado = elemento.replace(' ', '')
-        quarto_caractere = elemento_tratado[3] if len(elemento_tratado) > 3 else None
-        decimo_terceiro_caractere = elemento_tratado[12] if len(elemento_tratado) > 12 else None
+        quarto_caractere = elemento[3] if len(elemento) > 3 else None
+        decimo_terceiro_caractere = elemento[12] if len(elemento) > 12 else None
         lista_quarto.append(quarto_caractere)
         lista_decimo_terceiro.append(decimo_terceiro_caractere)
     
@@ -85,27 +61,21 @@ def caracteres(lista):
 def quantidade_caracteres(lista):
     print("Quantidade de caracteres:")
     for elemento in lista:
-        elemento_tratado = elemento.replace(' ', '')
-        quantidade = len(elemento_tratado)
+        #elemento_tratado = elemento.replace(' ', '')
+        quantidade = len(elemento)
         print(f"{elemento}: {quantidade}")
 
-# Chamada da função para extrair os títulos do arquivo 'netflix_titles.csv'
+# Chamada da função para extrair as informações do arquivo 'netflix_titles.csv'
 titulos_netflix = extrair_dados('netflix_titles.csv')
 
-# Chamada da função para extrair a quantidade de 'type'
-contador(tipos_com_a)
-contador(tipos_com_k)
-
-# Chamada da função para extrair a quantidade de 'rating'
-contador(avaliacoes_com_a)
-contador(avaliacoes_com_k)
-
 # Chamada da função para extrair a quantidade de 'country'
-contador(pais_com_k)
+#contador(pais)
 
 # Chamada da função para extrair a quantidade de 'duration'
-contador(duracao_com_k)
+#contador(duracao)
 
-caracteres(descricoes_com_a) 
+# Chamada da função para extrair o quarto e o décimo-terceiro caractere de 'director'
+#caracteres(diretores)
 
-quantidade_caracteres(descricoes_com_a)
+# Chamada da função para extrair a quantidade dos caracteres de 'director'
+quantidade_caracteres(diretores)
