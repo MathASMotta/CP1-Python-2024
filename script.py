@@ -69,13 +69,13 @@ def quantidade_caracteres(lista):
 titulos_netflix = extrair_dados('netflix_titles.csv')
 
 # Chamada da função para extrair a quantidade de 'country'
-#contador(pais)
+contador(pais)
 
 # Chamada da função para extrair a quantidade de 'duration'
-#contador(duracao)
+contador(duracao)
 
 # Chamada da função para extrair o quarto e o décimo-terceiro caractere de 'director'
-#caracteres(diretores)
+caracteres(diretores)
 
 # Chamada da função para extrair a quantidade dos caracteres de 'director'
 quantidade_caracteres(diretores)
